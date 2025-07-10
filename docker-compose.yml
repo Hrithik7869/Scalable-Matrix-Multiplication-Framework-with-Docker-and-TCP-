@@ -1,0 +1,59 @@
+services:
+  central:
+    build:
+      context: .
+      dockerfile: ./central/Dockerfile.central
+    container_name: central
+    ports:
+      - "5000:8080"
+    networks:
+      - matrix_net
+
+  worker1:
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile.worker
+    container_name: worker1
+    ports:
+      - "5101:8080"   # Changed from 5001
+    networks:
+      - matrix_net
+    command: ["./worker", "1"]
+
+  worker2:
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile.worker
+    container_name: worker2
+    ports:
+      - "5102:8080"   # Changed from 5002
+    networks:
+      - matrix_net
+    command: ["./worker", "2"]
+
+  worker3:
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile.worker
+    container_name: worker3
+    ports:
+      - "5103:8080"   # Changed from 5003
+    networks:
+      - matrix_net
+    command: ["./worker", "3"]
+
+  worker4:
+    build:
+      context: .
+      dockerfile: ./worker/Dockerfile.worker
+    container_name: worker4
+    ports:
+      - "5104:8080"   # Changed from 5004
+    networks:
+      - matrix_net
+    command: ["./worker", "4"]
+
+networks:
+  matrix_net:
+    driver: bridge
+

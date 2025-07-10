@@ -1,0 +1,6 @@
+FROM gcc:latest
+WORKDIR /app
+COPY central/central.c .
+RUN gcc -o central_exec central.c
+CMD ["./central_exec"]
+

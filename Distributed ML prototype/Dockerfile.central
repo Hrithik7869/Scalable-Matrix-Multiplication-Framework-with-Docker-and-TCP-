@@ -1,0 +1,13 @@
+# Dockerfile (for both worker and central)
+FROM python:3.8-slim
+
+# Install necessary dependencies
+WORKDIR /app
+COPY . /app
+RUN pip install -r requirements.txt
+
+# Copy any other necessary files
+COPY . .
+
+# Command to run (can be customized for worker or central)
+CMD ["python", "central_new.py"] 

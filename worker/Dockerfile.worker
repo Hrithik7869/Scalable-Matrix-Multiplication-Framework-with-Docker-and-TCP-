@@ -1,0 +1,6 @@
+FROM gcc:latest
+WORKDIR /app
+COPY worker/worker.c .
+RUN gcc -o worker worker.c
+CMD ["./worker", "1"]
+

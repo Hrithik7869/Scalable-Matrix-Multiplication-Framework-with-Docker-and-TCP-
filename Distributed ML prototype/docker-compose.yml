@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  worker_1:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker1  # Customize the Dockerfile for worker 1
+    container_name: worker_1
+    networks:
+      - my_network
+    ports:
+      - "5000:5000"  # Adjust port if necessary
+
+  worker_2:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker2  # Customize the Dockerfile for worker 2
+    container_name: worker_2
+    networks:
+      - my_network
+    ports:
+      - "5001:5001"  # Adjust port if necessary
+
+  central:
+    build:
+      context: .
+      dockerfile: Dockerfile.central  # Customize the Dockerfile for central node
+    container_name: central_container
+    networks:
+      - my_network
+    ports:
+      - "5002:5002"  # Port for central node if needed
+    depends_on:
+      - worker_1
+      - worker_2
+
+networks:
+  my_network:
+    driver: bridge
